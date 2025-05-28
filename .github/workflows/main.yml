@@ -1,0 +1,22 @@
+name: Run Script Daily
+
+on:
+  schedule:
+    - cron: '0 19 * * *'   # 注意：UTC时间，19点=北京时间凌晨3点
+  workflow_dispatch:        # 手动触发按钮
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Run the script
+      run: python buhsu.py
